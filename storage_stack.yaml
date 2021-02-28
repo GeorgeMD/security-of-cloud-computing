@@ -1,0 +1,49 @@
+heat_template_version: 2013-05-23
+
+parameters:
+  image_id:
+    type: string
+    label: Image id
+    description: Image id
+    default: cd7db00c-fff0-4c94-8448-312061ee44d8
+
+resources:
+  controller:
+    type: OS::Nova::Server
+    properties:
+      name: controller
+      image: { get_param: image_id }
+      flavor: m1.medium
+      key_name: fep
+      networks:
+      - network: vlan9
+
+  compute:
+    type: OS::Nova::Server
+    properties:
+      name: compute
+      image: { get_param: image_id }
+      flavor: m1.medium
+      key_name: fep
+      networks:
+      - network: vlan9
+  
+  storage-1:
+    type: OS::Nova::Server
+    properties:
+      name: storage-1
+      image: { get_param: image_id }
+      flavor: m1.tiny
+      key_name: fep
+      networks:
+      - network: vlan9
+      
+  storage-2:
+    type: OS::Nova::Server
+    properties:
+      name: storage-2
+      image: { get_param: image_id }
+      flavor: m1.tiny
+      key_name: fep
+      networks:
+      - network: vlan9
