@@ -5,7 +5,7 @@ parameters:
     type: string
     label: Image id
     description: Image id
-    default: cd7db00c-fff0-4c94-8448-312061ee44d8
+    default: 2d2e5ea1-5afe-47a3-aad7-b803c4bd7ec8
 
 resources:
   controller:
@@ -17,6 +17,11 @@ resources:
       key_name: fep
       networks:
       - network: vlan9
+      # user_data:
+      #   str_replace:
+      #     template: {get_file: init_nodes.sh}
+      #     params:
+      #       $NODE: "controller"
 
   compute:
     type: OS::Nova::Server
@@ -27,6 +32,11 @@ resources:
       key_name: fep
       networks:
       - network: vlan9
+      # user_data:
+      #   str_replace:
+      #     template: {get_file: init_nodes.sh}
+      #     params:
+      #       $NODE: "compute"
   
   storage-1:
     type: OS::Nova::Server
@@ -37,6 +47,11 @@ resources:
       key_name: fep
       networks:
       - network: vlan9
+      # user_data:
+      #   str_replace:
+      #     template: {get_file: init_nodes.sh}
+      #     params:
+      #       $NODE: "storage"
       
   storage-2:
     type: OS::Nova::Server
@@ -47,3 +62,8 @@ resources:
       key_name: fep
       networks:
       - network: vlan9
+      # user_data:
+      #   str_replace:
+      #     template: {get_file: init_nodes.sh}
+      #     params:
+      #       $NODE: "storage"
